@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block button %}
+<a href="{% url 'home' %}" class="ink-button black push-right">首页</a>
+{% endblock %}
+{% block content %}
+<div id="content" class="typo">
+    <div class="ink-grid">
+        <div class="column-group block">
+            <p class="title">捐书排行榜</p>
+        <table>
+            <thead>
+            <tr>
+                <th>排名</th>
+                <th>姓名</th>
+                <th>学院</th>
+                <th>统计</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in ranks %}
+                <tr>
+                    <td>{{ item.rank }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.college }}</td>
+                    <td><a href="{% url 'donor:one' item.id %}">{{ item.count }}本</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

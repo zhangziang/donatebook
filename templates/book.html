@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block button %}
+<a href="{% url 'home' %}" class="ink-button black push-right">首页</a>
+{% endblock %}
+{% block content %}
+<div id="content" class="typo">
+    <div class="ink-grid">
+        <div class="column-group block">
+        {% if book %}
+            <p class="title all-100" style="margin-bottom: 10px;">{{ book.name }}</p>
+            {% if book.front_cover_image  %}
+            <img class="all-20" src="{{ book.front_cover_image }}" alt="">
+            {% endif %}
+            <div class="all-70" id="book_info">
+                <p>作者: {{ book.author }}</p>
+                <p>出版社: {{ book.publisher }}</p>
+                <p>ISBN: {{ book.isbn }}</p>
+                <p>豆瓣评分: {% if book.douban_rating %}{{ book.douban_rating }}{% else %}暂无评分{% endif %}</p>
+                <p>图书馆索书号: {% if book.lib_index %}{{ book.lib_index }}{% else %}尚未添加到图书馆{% endif %}</p>
+                <p><a href="{% url 'donor:one' book.donor.id %}">捐书人: {{ book.donor.name }}</a></p>
+            </div>
+            <div class="all-100"><hr/></div>
+            <p class="all-100 book_tag">图书简介······</p>
+            <p>{{ book.content_introduction }}</p>
+            <p class="all-100 book_tag">作者简介······</p>
+            <p>{{ book.author_introduction }}</p>
+            <p class="all-100 book_tag">编辑推荐······</p>
+            <p>{{ book.editor_comment }}</p>
+        {% else %}
+            <p>您要找的图书不存在！</p>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

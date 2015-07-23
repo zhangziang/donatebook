@@ -1,0 +1,109 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>长理工光电学院捐书展板</title>
+    <link rel="stylesheet" href="{% static 'css/ink.css' %}">
+    <link rel="stylesheet" href="{% static 'css/typo.css' %}">
+    <style type="text/css">
+        html{
+            font-size: 16px;
+            letter-spacing: 0.08em;
+        }
+        header{
+            background: #fff;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+        header span{
+            margin-left: 10px;
+            font-size: 0.8em;
+            color: #777;
+        }
+        #content{
+            background: #eee;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+        #content .one{
+            margin-top: 20px;
+            margin-bottom: 40px;
+            background: #fff;
+        }
+        #content .block{
+            margin-top: 40px;
+            margin-bottom: 10px;
+            background: #fff;
+            padding: 50px;
+        }
+        .book_info{
+            padding: 20px;
+        }
+        .title{
+            width: 100%;
+            font-size: 2em;
+            color: #000;
+        }
+        .title a{
+            border-bottom: none;
+        }
+        footer{
+            background: #333;
+            color: #eee;
+            font-size:14px;
+            padding-top:10px;
+            padding-bottom: 10px;
+        }
+        .intro{
+            padding-top: 10px;
+        }
+        #book_info{
+            padding-left: 10px;
+        }
+        #book_info p{
+            margin-bottom: 5px;
+            font-size: 0.8em;
+        }
+        .book_tag{
+            margin-bottom: 10px;
+            color: #1abc9c;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="ink-grid">
+        <div class="column-group">
+            <div class="all-60 small-100">
+                <h1>长春理工大学光电学院<span>捐书展示板</span></h1>
+            </div>
+            <form action="{% url 'search' %}" method="get" class="ink-form">
+                <div class="all-30 small-100">
+                    <div class="column-group push-right">
+                        <div class="control all-75">
+                            <input type="text" placeholder="书名/学生姓名" style="height: 40px;" name="search_key"/>
+                        </div>
+                        <div class="control all-25">
+                            <button class="ink-button" type="submit">搜索</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="all-10 small-100">
+                {% block button %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</header>
+{% block content %}
+{% endblock %}
+<footer>
+<div class="ink-grid">
+    <p>图书均由学生捐赠予图书馆，同学们可以进行借阅。</p>
+    <p style="color:#aaa;">长春理工大学光电学院图书馆</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block button %}
+<a href="{% url 'home' %}" class="ink-button black push-right">首页</a>
+{% endblock %}
+{% block content %}
+<div id="content" class="typo">
+    <div class="ink-grid">
+        <div class="column-group block">
+        {% if books %}
+        <small>图书检索结果</small>
+        <hr/>
+        {% for book in books %}
+        <p style="margin-bottom: 10px;"><a href="{% url 'book:one' book.id %}" style="border-bottom: none;">{{ book.name }}</a></p>
+        {% endfor %}
+        {% endif %}
+        {% if donors %}
+        <small>学生检索结果</small>
+        <hr/>
+        {% for donor in donors %}
+        <p style="margin-bottom: 10px;"><a href="{% url 'donor:one' donor.id %}" style="border-bottom: none;">{{ donor.name }}</a></p>
+        {% endfor %}
+        {% endif %}
+        {% if not books and not donors %}
+        <p>未找到任何结果</p>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

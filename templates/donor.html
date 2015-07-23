@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block button %}
+<a href="{% url 'home' %}" class="ink-button black push-right">首页</a>
+{% endblock %}
+{% block content %}
+<div id="content" class="typo">
+    <div class="ink-grid">
+        <div class="column-group block">
+            {% if not books %}
+            <p>没有结果</p>
+            {% else %}
+            <p class="title">{{ name }}</p>
+            <small>来自{{ college }}的{{ name }}一共捐书{{ count }}本</small>
+            <hr/>
+            <div style="margin-top: 10px;">
+                {% for book in books %}
+                <p style="margin-bottom: 10px;"><a href="{% url 'book:one' book.id %}" style="border-bottom: none;">{{ book.name }}</a></p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

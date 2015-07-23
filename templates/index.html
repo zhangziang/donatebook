@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block button %}
+<a href="{% url 'rank' %}" class="ink-button black push-right">排行榜</a>
+{% endblock %}
+{% block content %}
+<div id="content" class="typo">
+    <div class="ink-grid">
+    {% if not books %}
+        <p>无内容</p>
+    {% endif %}
+        {% for book in books %}
+        <div class="column-group one">
+            <div class="all-70 book_info">
+                <p class="title">
+                    <a href="{% url 'book:one' book.id %}">{{ book.name }}</a>
+                    {% if book.douban_rating %}
+                    <strong class="push-right" style="color: {% if book.douban_rating >= 8 %}#5cb85c{% elif book.douban_rating >= 6 %}#f0ad4e{% elif book.douban_rating == 0 %}#e6e6e6{% else %}#d9534f{% endif %}; font-size: 2em;">{% if book.douban_rating == 0 %}无{% else %}{{ book.douban_rating }}{% endif %}</strong>
+                    {% endif %}
+                </p>
+                <small>作者: {{ book.author }} | <a href="{% url 'donor:one' book.donor.id %}">捐书人: {{ book.donor.name }}</a></small>
+                <p class="intro">{{ book.content_introduction }}</p>
+            </div>
+            {% if book.front_cover_image %}
+            <img src="{{ book.front_cover_image }}" alt="" class="all-30">
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% if books %}
+        <div class="column-group">
+            <div class="all-50 push-center">
+                {% if before_page %}
+                    <a href="/{{ page_last }}" class="ink-button" style="border-bottom: none;">上一页</a>
+                {% else %}
+                    <span class="ink-button" style="border-bottom: none;" disabled>上一页</span>
+                {% endif %}
+                {% if after_page %}
+                    <a href="/{{ page_next }}" class="ink-button push-right" style="border-bottom: none;">下一页</a>
+                {% else %}
+                    <span class="ink-button push-right" style="border-bottom: none;" disabled>下一页</span>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
