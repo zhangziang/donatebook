@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import TemplateView
 
-from .views import IndexView, RankView, SearchView
+from .views import ListView, RankView, SearchView
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^(?P<page>[0-9]+)/$', IndexView.as_view()),
-    url(r'^$', IndexView.as_view(), name='home'),
+    url(r'^list/(?P<page>[0-9]+)/$', ListView.as_view()),
+    url(r'^list$', ListView.as_view(), name='list'),
     url(r'^book/', include('book.urls', namespace='book')),
     url(r'^rank/$', RankView.as_view(), name='rank'),
     url(r'^donor/', include('donor.urls', namespace='donor')),

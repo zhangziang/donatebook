@@ -6,8 +6,8 @@ from book.models import Book
 from donor.models import Donor
 
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
+class ListView(TemplateView):
+    template_name = 'list.html'
     one_page_item = 10
 
     def get(self, request, page='1', *args, **kwargs):

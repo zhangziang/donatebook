@@ -1,47 +1,29 @@
-{% extends "layout.html" %}
-
+{% extends 'layout.html' %}
 {% block button %}
+<div class="all-50"></div>
+<a href="{% url 'list' %}" class="ink-button black" style="margin:0 17px;">书籍</a>
 <a href="{% url 'rank' %}" class="ink-button black push-right">排行榜</a>
 {% endblock %}
 {% block content %}
 <div id="content" class="typo">
     <div class="ink-grid">
-    {% if not books %}
-        <p>无内容</p>
-    {% endif %}
-        {% for book in books %}
-        <div class="column-group one">
-            <div class="all-70 book_info">
-                <p class="title">
-                    <a href="{% url 'book:one' book.id %}">{{ book.name }}</a>
-                    {% if book.douban_rating %}
-                    <strong class="push-right" style="color: {% if book.douban_rating >= 8 %}#5cb85c{% elif book.douban_rating >= 6 %}#f0ad4e{% elif book.douban_rating == 0 %}#e6e6e6{% else %}#d9534f{% endif %}; font-size: 2em;">{% if book.douban_rating == 0 %}无{% else %}{{ book.douban_rating }}{% endif %}</strong>
-                    {% endif %}
-                </p>
-                <small>作者: {{ book.author }} | <a href="{% url 'donor:one' book.donor.id %}">捐书人: {{ book.donor.name }}</a></small>
-                <p class="intro">{{ book.content_introduction }}</p>
-            </div>
-            {% if book.front_cover_image %}
-            <img src="{{ book.front_cover_image }}" alt="" class="all-30">
-            {% endif %}
+        <div class="column-group block">
+            <div style="font-size: 2em; font-weight: bold; text-align: center;">捐书倡议书</div>
+            <p>全院师生员工：</p>
+            <p>学院是全体师生员工共同的精神家园，她今日取得的每一个成绩，都饱含着全体师生员工的智慧和汗水；而她明天的发展，更需要大家的关注与支持。</p>
+            <p>学院图书馆是校园文化的重要载体，图书馆的规模、层次折射着一所学校的办学方针和水平，同时也是全院师生员工信息交流的平台。普希金说过：书籍是我们的精神粮食，怎么让书籍发挥其更大的作用呢？那就是让它流通起来，别把它束之高阁。相信每一位爱书的都会希望自己的图书能在一双又一双求知的眼底传播力量、产生效益，而不是在箱底蒙尘……为此，图书馆面向全体师生员工及校友发出捐书倡议：请将您手中闲置的藏书捐献给学院图书馆，让它们找到更多读者。</p>
+            <p>捐一册书籍，留一份真情；赠一本图书、献一份爱心。一本书不为少，百册书不算多。您的捐赠也许有限，但我们深信聚沙成塔的力量—涓涓细流，汇成大海。授人玫瑰，手留余香，您的慷慨捐赠定会让更多人受益，也会让书的价值和您的境界得到升华。加入到我们的捐书活动中来吧，让我们在书香的传递中将光电精神发扬光大！</p>
+            <p>衷心期待您的参与！</p>
+            <p>捐书活动要求：</p>
+            <ol>
+                <li>各个历史时期正式出版、内容健康、保存较完好的书籍（不包单本杂志、散页报纸、少儿类读物、中小学教科书、学生上课教材）最好是内容与我院专业有关的图书及教师个人专著等。</li>
+                <li>捐书范围：文学类、励志类、艺术类、生活百科、工具书、科普、科技类、人物传记等健康向上，知识性强的图书。</li>
+                <li>针对所有教职工、校友、同学捐赠的图书，图书馆会单独建立一个数据库，并定期在我院图书馆主页上分享捐赠排行名单。</li>
+                <li>捐赠时间：从即日起长期有效。</li>
+                <li>捐书地点：主教3楼302采编办公室。</li>
+                <li>联系电话:86015148</li>
+            </ol>
         </div>
-        {% endfor %}
-    {% if books %}
-        <div class="column-group">
-            <div class="all-50 push-center">
-                {% if before_page %}
-                    <a href="/{{ page_last }}" class="ink-button" style="border-bottom: none;">上一页</a>
-                {% else %}
-                    <span class="ink-button" style="border-bottom: none;" disabled>上一页</span>
-                {% endif %}
-                {% if after_page %}
-                    <a href="/{{ page_next }}" class="ink-button push-right" style="border-bottom: none;">下一页</a>
-                {% else %}
-                    <span class="ink-button push-right" style="border-bottom: none;" disabled>下一页</span>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
     </div>
 </div>
 {% endblock %}

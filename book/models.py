@@ -26,7 +26,7 @@ class Book(models.Model):
 
     lib_index = models.CharField(verbose_name=u'图书馆索书号', max_length=50, null=True, blank=True)
 
-    donor = models.ForeignKey(to=Donor, verbose_name=u'捐书学生')
+    donor = models.ForeignKey(to=Donor, verbose_name=u'捐书人')
     editor_comment = models.TextField(verbose_name=u'编辑推荐', blank=True, default=u'编辑什么都没有留下。')
 
     def save(self, *args):
